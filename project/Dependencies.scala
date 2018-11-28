@@ -24,7 +24,7 @@ object Dependencies {
   lazy val scalaCheckVersion = settingKey[String]("The version of ScalaCheck to use.")
 
   val Versions = Seq(
-    crossScalaVersions := Seq("2.12.7", "2.11.12"/*, "2.13.0-M3"*/),
+    crossScalaVersions := Seq("2.12.7", "2.11.12", "2.13.0-M5"),
     scalaVersion := crossScalaVersions.value.head,
     scalaCheckVersion := System.getProperty("akka.build.scalaCheckVersion", "1.14.0"),
     scalaTestVersion := "3.0.5",
@@ -52,6 +52,8 @@ object Dependencies {
 
     val caffeine    = "com.github.ben-manes.caffeine" % "caffeine"                     % "2.6.2"
     val jsr305      = "com.google.code.findbugs"      % "jsr305"                       % "3.0.2"             % Provided // ApacheV2
+
+    val collectionCompat = "org.scala-lang.modules" %% "scala-collection-compat" % "0.2.1"
 
     object Docs {
       val sprayJson   = Compile.sprayJson                                                                    % "test"
@@ -86,6 +88,7 @@ object Dependencies {
   )
 
   lazy val httpCore = l ++= Seq(
+    collectionCompat,
     Test.sprayJson, // for WS Autobahn test metadata
     Test.scalatest.value, Test.scalacheck.value, Test.junit)
 
